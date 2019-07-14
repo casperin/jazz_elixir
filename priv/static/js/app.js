@@ -3,6 +3,10 @@ window.addEventListener("keydown", function (e) {
         return
     }
 
+    if (e.ctrlKey || e.altKey) {
+        return
+    }
+
     switch (e.key) {
         case "j":
             return move(1)
