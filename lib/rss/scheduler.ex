@@ -1,4 +1,4 @@
-defmodule RSS.Fetcher do
+defmodule RSS.Scheduler do
   use GenServer
 
   def start_link([]) do
@@ -12,7 +12,7 @@ defmodule RSS.Fetcher do
 
   def handle_info(:fetch, state) do
     Jazz.Repo.all(Jazz.Feed)
-    |> Stream.map(fn feed -> {feed.id, RSS.Get.fetch(feed.url)} end)
+    |> Stream.map(fn feed -> {feed.id, RSS.get(feed.url)} end)
     |> Stream.map(fn {feed_id, {:ok, _feed, posts}} -> {posts, feed_id} end)
     |> Enum.each(&DB.Update.insert_posts_optimistic(&1))
 

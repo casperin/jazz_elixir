@@ -16,7 +16,7 @@ defmodule Jazz.Application do
       JazzWeb.Endpoint,
       # Starts a worker by calling: Jazz.Worker.start_link(arg)
       # {Jazz.Worker, arg},
-      RSS.Fetcher
+      RSS.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

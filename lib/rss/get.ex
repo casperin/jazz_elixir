@@ -1,5 +1,5 @@
-defmodule RSS.Get do
-  def fetch(url) do
+defmodule RSS do
+  def get(url) do
     case fetch_(url) do
       {:ok, feed} -> parse(url, feed)
       _ -> {:error, "Could not fetch or parse feed"}

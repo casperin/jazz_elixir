@@ -29,7 +29,7 @@ defmodule JazzWeb.FeedController do
   end
 
   def preview(conn, %{"url" => url}) do
-    case RSS.Get.fetch(url) do
+    case RSS.get(url) do
       {:ok, feed, posts} ->
         conn
         |> render("preview.html", feed: feed, posts: posts, page: "Preview: #{feed.title}")
@@ -43,7 +43,7 @@ defmodule JazzWeb.FeedController do
   end
 
   def create(conn, %{"url" => url}) do
-    case RSS.Get.fetch(url) do
+    case RSS.get(url) do
       {:ok, feed_attr, post_attrs} ->
         msg = case DB.Update.get_or_insert_feed(feed_attr) do
           {:ok, feed} ->
