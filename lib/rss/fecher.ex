@@ -14,7 +14,7 @@ defmodule RSS.Fetcher do
     Jazz.Repo.all(Jazz.Feed)
     |> Stream.map(fn feed -> {feed.id, RSS.Get.fetch(feed.url)} end)
     |> Stream.map(fn {feed_id, {:ok, _feed, posts}} -> {posts, feed_id} end)
-    |> Enum.each(&RSS.Repo.insert_posts_optimistic(&1))
+    |> Enum.each(&DB.Update.insert_posts_optimistic(&1))
 
     schedule_work(60 * 60 * 1000) # In 1 hour
     {:noreply, state}

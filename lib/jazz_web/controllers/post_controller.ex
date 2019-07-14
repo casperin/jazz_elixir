@@ -1,10 +1,9 @@
 defmodule JazzWeb.PostController do
   use JazzWeb, :controller
-  alias Jazz.{Repo, Post}
 
   # unread posts
   def index(conn, _params) do
-    posts = RSS.Repo.all_unread_posts
+    posts = DB.Get.all_unread_posts
     ids = Stream.map(posts, fn p -> p.id end) |> Enum.join(",")
     render(
       conn,
@@ -20,7 +19,7 @@ defmodule JazzWeb.PostController do
     render(
       conn,
       "saved.html",
-      posts: RSS.Repo.all_saved_posts,
+      posts: DB.Get.all_saved_posts,
       page: "saved"
     )
   end
@@ -30,14 +29,14 @@ defmodule JazzWeb.PostController do
     render(
       conn,
       "podcasts.html",
-      posts: RSS.Repo.all_saved_podcasts,
+      posts: DB.Get.all_saved_podcasts,
       page: "podcasts"
     )
   end
 
   # See specific post
   def show(conn, %{"id" => id}) do
-    post = Repo.get!(Post, id)
+    post = DB.Get.post(id)
     render(
       conn,
       "show.html",
@@ -47,22 +46,22 @@ defmodule JazzWeb.PostController do
   end
 
   def set_read(conn, %{"id" => id}) do
-    RSS.Repo.set_read(id, true)
+    DB.Update.set_read_post(id, true)
     redirect(conn, to: Routes.post_path(conn, :index))
   end
 
   def toggle_saved(conn, %{"id" => id, "to" => to}) do
-    RSS.Repo.toggle_saved(id)
+    DB.Update.toggle_saved_post(id)
     redirect(conn, to: Routes.post_path(conn, get_path(to)))
   end
 
   def toggle_podcast(conn, %{"id" => id, "to" => to}) do
-    RSS.Repo.toggle_podcast(id)
+    DB.Update.toggle_podcast_post(id)
     redirect(conn, to: Routes.post_path(conn, get_path(to)))
   end
 
-  defp get_path(to) do
-    case to do
+  defp get_path(page) do
+    case page do
       "saved" -> :saved
       "podcasts" -> :podcasts
       _ -> :index
@@ -71,7 +70,7 @@ defmodule JazzWeb.PostController do
 
   def all_read(conn, %{"ids" => ids}) do
     if ids != "" do
-      RSS.Repo.set_all_read String.split(ids, ","), true
+      DB.Update.set_all_read_post String.split(ids, ","), true
     end
     redirect(conn, to: Routes.post_path(conn, :index))
   end

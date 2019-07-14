@@ -37,7 +37,7 @@ defmodule RSS.Get do
     
   defp parse_post(feed_title, entry) do
     %{
-      guid: guid(entry.id, entry.title),
+      guid: entry.id || guid_from_title(entry.title),
       feed_title: feed_title,
       title: entry.title,
       link: entry.link,
@@ -45,11 +45,9 @@ defmodule RSS.Get do
     }
   end
 
-  defp guid(nil, title) do
+  defp guid(title) do
     title
     |> Base.encode16(case: :lower)
     |> String.slice(0, 20)
   end
-
-  defp guid(id, _), do: id
 end

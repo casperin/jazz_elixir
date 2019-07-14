@@ -1,17 +1,17 @@
 defmodule JazzWeb.FeedController do
   use JazzWeb, :controller
-  alias Jazz.{Repo, Feed}
 
   def index(conn, _params) do
     render(
       conn,
       "index.html",
-      feeds: Repo.all(Feed), page: "feeds"
+      feeds: DB.Get.all_feeds,
+      page: "feeds"
     )
   end
 
   def show(conn, %{"id" => id}) do
-    case Repo.get(Feed, id) do
+    case DB.Get.feed(id) do
       nil ->
         conn
         |> put_flash(:error, "Could not find feed with id #{id}")
@@ -22,7 +22,7 @@ defmodule JazzWeb.FeedController do
           conn,
           "show.html",
           feed: feed,
-          posts: RSS.Repo.all_posts_from_feed(feed.id),
+          posts: DB.Get.all_posts_from_feed(feed.id),
           page: feed.title
         )
     end
@@ -45,10 +45,10 @@ defmodule JazzWeb.FeedController do
   def create(conn, %{"url" => url}) do
     case RSS.Get.fetch(url) do
       {:ok, feed_attr, post_attrs} ->
-        msg = case RSS.Repo.get_or_insert_feed(feed_attr) do
+        msg = case DB.Update.get_or_insert_feed(feed_attr) do
           {:ok, feed} ->
             IO.inspect post_attrs
-            x = RSS.Repo.insert_posts_optimistic({post_attrs, feed.id})
+            x = DB.Update.insert_posts_optimistic({post_attrs, feed.id})
             IO.inspect x
             "#{feed.title} saved"
 
@@ -69,8 +69,7 @@ defmodule JazzWeb.FeedController do
   end
 
   def delete(conn, %{"id" => id}) do
-    feed = Repo.get!(Feed, id)
-    case Repo.delete feed do
+    case DB.Update.delete_feed(id) do
       {:ok, _} ->
         conn
         |> put_flash(:info, "The feed will miss you")
