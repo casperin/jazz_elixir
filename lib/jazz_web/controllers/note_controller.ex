@@ -1,7 +1,7 @@
 defmodule JazzWeb.NoteController do
   use JazzWeb, :controller
 
-  @notes_path System.get_env("NOTES_PATH") || "/home/g/notes-x"
+  @notes_path System.get_env("NOTES_PATH") || "/home/g/notes"
 
   defp full_path(file), do: "#{@notes_path}/#{file}"
 
