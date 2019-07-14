@@ -46,7 +46,8 @@ defmodule Jazz.MixProject do
       {:earmark, "~> 1.3"},
       {:basic_auth, "~> 2.2.2"},
       {:httpoison, "~> 1.4"},
-      {:feeder_ex, "~> 1.1"}
+      #{:feeder_ex, "~> 1.1"}
+      {:feeder_ex, git: "https://github.com/KristerV/feeder_ex.git"}
     ]
   end
 
