@@ -1,0 +1,15 @@
+<h1 class=title>Feeds</h1>
+
+<%= form_for @conn, Routes.feed_path(@conn, :preview), fn f -> %>
+  <%= text_input f, :url, required: true %>
+
+  <%= submit "Add feed" %>
+<% end %>
+
+<ul>
+  <%= for feed <- @feeds do %>
+    <li>
+      <%= link feed.title, to: Routes.feed_path(@conn, :show, feed.id), class: "item" %>
+    </li>
+  <% end %>
+</ul>

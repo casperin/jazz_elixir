@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= @page %></title>
+    <link rel=icon href="data:;base64,=">
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+  </head>
+  <body>
+    <nav role="navigation">
+      <div class=logo>♪ Jazz</div>
+      <%= if @page == "unread" do %>
+        <%= link "Unread", to: Routes.post_path(@conn, :index), tabindex: -1, class: "current" %>
+      <% else %>
+        <%= link "Unread", to: Routes.post_path(@conn, :index), tabindex: -1 %>
+      <% end %>
+
+      <%= if @page == "saved" do %>
+        <%= link "Saved", to: Routes.post_path(@conn, :saved), tabindex: -1, class: "current" %>
+      <% else %>
+        <%= link "Saved", to: Routes.post_path(@conn, :saved), tabindex: -1 %>
+      <% end %>
+
+      <%= if @page == "podcasts" do %>
+        <%= link "Podcasts", to: Routes.post_path(@conn, :podcasts), tabindex: -1, class: "current" %>
+      <% else %>
+        <%= link "Podcasts", to: Routes.post_path(@conn, :podcasts), tabindex: -1 %>
+      <% end %>
+
+      <%= if @page == "links" do %>
+        <%= link "Links", to: Routes.link_path(@conn, :index), tabindex: -1, class: "current" %>
+      <% else %>
+        <%= link "Links", to: Routes.link_path(@conn, :index), tabindex: -1 %>
+      <% end %>
+
+      <%= if @page == "notes" do %>
+        <%= link "Notes", to: Routes.note_path(@conn, :index), tabindex: -1, class: "current" %>
+      <% else %>
+        <%= link "Notes", to: Routes.note_path(@conn, :index), tabindex: -1 %>
+      <% end %>
+
+      <%= if @page == "feeds" do %>
+        <%= link "Feeds", to: Routes.feed_path(@conn, :index), tabindex: -1, class: "current" %>
+      <% else %>
+        <%= link "Feeds", to: Routes.feed_path(@conn, :index), tabindex: -1 %>
+      <% end %>
+    </nav>
+    <main>
+      <p class="msg msg__info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="msg msg__error" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/phx.js") %>"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

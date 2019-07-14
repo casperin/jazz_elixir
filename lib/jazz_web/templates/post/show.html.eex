@@ -1,0 +1,12 @@
+<h1><a href="<%= @post.link %>"><%= @post.title %></a></h1>
+<div class=content>
+  <%= raw @post.content %>
+</div>
+
+<script>
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "g") {
+      document.location.href = "<%= @post.link %>"
+    }
+  })
+</script>

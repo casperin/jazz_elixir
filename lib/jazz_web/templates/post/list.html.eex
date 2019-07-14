@@ -1,0 +1,30 @@
+<ul>
+  <%= for post <- @posts do %>
+    <li>
+      <%= link post.title, to: Routes.post_path(@conn, :show, id: post.id), class: "item" %>
+
+      <br>
+
+      <small>
+        <%= if !post.saved do %>
+          <%= link "rm", to: Routes.post_path(@conn, :set_read, id: post.id, to: @to), class: "set-read", "data-keep-scroll-position": "true" %>
+          &middot;
+        <% end %>
+
+        <%= if post.saved do %>
+          <%= link "Forget", to: Routes.post_path(@conn, :toggle_saved, id: post.id, to: @to), class: "toggle-save", "data-keep-scroll-position": "true" %>
+        <% else %>
+          <%= link "Save", to: Routes.post_path(@conn, :toggle_saved, id: post.id, to: @to), class: "toggle-save", "data-keep-scroll-position": "true" %>
+        <% end %>
+
+        &middot;
+
+        <%= link "Podcast", to: Routes.post_path(@conn, :toggle_podcast, id: post.id, to: @to), class: "toggle-podcast", "data-keep-scroll-position": "true" %>
+
+        &mdash;
+
+        <%= post.feed_title %>
+      </small>
+    </li>
+  <% end %>
+</ul>

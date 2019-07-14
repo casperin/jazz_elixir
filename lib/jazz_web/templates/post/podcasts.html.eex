@@ -1,0 +1,3 @@
+<h1 class=title><%= length(@posts) %> podcasts</h1>
+
+<%= render "list.html", conn: @conn, posts: @posts, to: @page %>

@@ -1,0 +1,23 @@
+<h1 class=title>Git</h1>
+
+<div style="display:flex">
+  <%= form_for @conn, Routes.note_path(@conn, :git_add_commit), fn f -> %>
+    <%= text_input f, :message, placeholder: "Commit message" %>
+    <%= submit "add & commit" %>
+  <% end %>
+
+  <%= form_for @conn, Routes.note_path(@conn, :git_pull), fn _f -> %>
+    <%= submit "pull" %>
+  <% end %>
+
+  &nbsp;
+
+  <%= form_for @conn, Routes.note_path(@conn, :git_push), fn _f -> %>
+    <%= submit "push" %>
+  <% end %>
+</div>
+
+<h2>Git status</h2>
+<pre><%= @status %></pre>
+<h2>Git diff</h2>
+<pre><%= @diff %></pre>

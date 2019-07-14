@@ -1,0 +1,99 @@
+/* Change at about:config -> ui.systemUsesDarkTheme
+@media (prefers-color-scheme: dark) {
+  body { background: #111; color:  #777; }
+}
+*/
+
+body {
+    margin: 0;
+    font: 19px/1.3 sans-serif;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+.hide {
+    display: none;
+}
+pre, code {
+    color: #306754;
+}
+ul p {
+    margin: 0;
+}
+li {
+    margin-bottom: .5em;
+}
+*:focus {
+    outline: 4px solid #fb7;
+    outline-offset: 0;
+}
+nav {
+    float: left;
+    width: 7em;
+    padding: 1em 0;
+}
+nav .logo {
+    padding: 5px 19px;
+}
+nav a {
+    display: block;
+    padding: 5px 19px;
+    color: blue;
+}
+nav a.current {
+    font-weight: bold;
+}
+main {
+    padding: 1px 0;
+    max-width: 44em;
+    margin-left: 8em;
+}
+@media (max-width: 52em) {
+    nav {
+        float: none;
+        width: auto;
+        padding: 1em 1em 0;
+    }
+    nav .logo {
+        display: none;
+    }
+    nav a {
+        display: inline;
+        padding: 0;
+        margin-right: 7px;
+    }
+    main {
+        margin-left: 0;
+        padding: 1em;
+    }
+}
+h1.title {
+    font-size: 19px;
+    font-weight: 400;
+    color: #888;
+}
+input {
+    border: 2px solid black;
+    width: 50%;
+    padding: 4px;
+}
+.msg {
+    background: #fea;
+    padding: 10px;
+}
+.msg:empty {
+    padding: 0;
+}
+.msg__error {
+    background: pink;
+}
+textarea.edit_note {
+    width: calc(100vw - 58px);
+    height: calc(100vh - 120px);
+    font-size: inherit;
+    padding: 10px;
+}
+

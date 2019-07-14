@@ -1,0 +1,14 @@
+<h1 class=title>
+  Notes
+  <%= link "Git", to: Routes.note_path(@conn, :git_diff) %>
+</h1>
+
+<input type=search placeholder=search class=search_item>
+
+<ul>
+  <%= for file <- @files do %>
+    <li data-text="<%= file %>" class="item">
+      <%= link file, to: Routes.note_path(@conn, :view, file: file) %>
+    </li>
+  <% end %>
+</ul>

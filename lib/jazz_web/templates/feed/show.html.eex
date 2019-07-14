@@ -1,0 +1,13 @@
+<h1><%= @feed.title %></h1>
+
+<%= form_for @conn, Routes.feed_path(@conn, :delete, @feed.id), fn _f -> %>
+  <code><%= @feed.url %></code>
+  <input name="_method" type="hidden" value="delete">
+  <%= submit "Unsubscribe" %>
+<% end %>
+
+<ul>
+  <%= for post <- @posts do %>
+    <li><%= link post.title, to: Routes.post_path(@conn, :show, id: post.id), class: "item" %></li>
+  <% end %>
+</ul>

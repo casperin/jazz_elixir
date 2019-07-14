@@ -1,0 +1,8 @@
+<div class="content">
+  <h1 class=title>
+    <%= @file %>&nbsp;
+    <%= link "edit", to: Routes.note_path(@conn, :edit, file: @file) %>
+  </h1>
+
+  <%= raw(to_html @file, @content) %>
+</div>

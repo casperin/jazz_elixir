@@ -1,0 +1,18 @@
+<%= form_for @conn, Routes.feed_path(@conn, :create), fn f -> %>
+  <h1 class=title>
+    <%= @feed.url %>&nbsp;
+    <%= submit "Subscribe" %>
+  </h1>
+  <%= hidden_input f, :url, value: @feed.url %>
+<% end %>
+
+<h2><%= @feed.title %></h2>
+
+<ul>
+  <%= for post <- @posts do %>
+    <li>
+      <a href="<%= post.link %>" class="item"><%= post.title %></a>
+    </li>
+  <% end %>
+</ul>
+

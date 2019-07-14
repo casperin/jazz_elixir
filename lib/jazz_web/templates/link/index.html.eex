@@ -1,0 +1,17 @@
+<h1 class=title><%= length(@links) %> links</h1>
+
+<%= form_for @conn, Routes.link_path(@conn, :create), fn f -> %>
+  <%= text_input f, :url, required: true %>
+
+  <%= submit "Add link" %>
+<% end %>
+
+<ul>
+  <%= for link <- @links do %>
+    <li>
+      <%= link link.title, to: link.url, class: "item" %>
+      <br>
+      <small><%= link "delete", to: Routes.link_path(@conn, :delete, link.id), class: 'toggle-save' %></small>
+    </li>
+  <% end %>
+</ul>
