@@ -38,6 +38,11 @@ defmodule RSS.Repo do
     Repo.all(query)
   end
 
+  def set_all_read(ids, read) do
+    query = from(p in Post, where: p.id in ^ids)
+    Repo.update_all(query, set: [read: read])
+  end
+
   def set_read(id, read) do
     Repo.get!(Post, id)
     |> Post.set_read(read)

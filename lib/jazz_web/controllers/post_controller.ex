@@ -4,10 +4,13 @@ defmodule JazzWeb.PostController do
 
   # unread posts
   def index(conn, _params) do
+    posts = RSS.Repo.all_unread_posts
+    ids = Stream.map(posts, fn p -> p.id end) |> Enum.join(",")
     render(
       conn,
       "index.html",
-      posts: RSS.Repo.all_unread_posts,
+      posts: posts,
+      ids: ids,
       page: "unread"
     )
   end
@@ -66,8 +69,10 @@ defmodule JazzWeb.PostController do
     end
   end
 
-  def all_read(conn, _params) do
-    Repo.update_all(Post, set: [read: true])
+  def all_read(conn, %{"ids" => ids}) do
+    if ids != "" do
+      RSS.Repo.set_all_read String.split(ids, ","), true
+    end
     redirect(conn, to: Routes.post_path(conn, :index))
   end
 end

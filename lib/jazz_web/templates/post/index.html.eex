@@ -1,7 +1,8 @@
-<%= form_for @conn, Routes.post_path(@conn, :all_read), fn _f -> %>
+<%= form_for @conn, Routes.post_path(@conn, :all_read), fn f -> %>
   <h1 class=title>
     <%= length(@posts) %> unread
-    <%= submit "Mark all as read" %>
+    <%= hidden_input f, :ids, value: @ids %>
+    <%= submit "Mark all as read", disabled: length(@posts) == 0 %>
   </h1>
 <% end %>
 
