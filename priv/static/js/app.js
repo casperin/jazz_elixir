@@ -54,7 +54,7 @@ window.addEventListener("keydown", function (e) {
 })
 
 var focused =  Number(localStorage.getItem("focused")) || -1
-var all_items = Array.from(document.querySelectorAll(".item, .content a"))
+var all_items = Array.from(document.querySelectorAll(".item:not(.hide), .content a"))
 if (all_items[focused]) {
     all_items[focused].focus()
     localStorage.removeItem("focused")
@@ -67,7 +67,7 @@ all_items.forEach((item, i) => {
 })
 
 function move(dx) {
-    var items = Array.from(document.querySelectorAll(".item, .content a"))
+    var items = Array.from(document.querySelectorAll(".item:not(.hide), .content a"))
     var last_index = items.length - 1
     focused += dx
     if (focused < 0 || focused > last_index) {
