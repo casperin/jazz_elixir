@@ -1,6 +1,6 @@
 defmodule DB.Update do
   import Ecto.Query
-  alias Jazz.{Repo, Feed, Post}
+  alias Jazz.{Repo, Feed, Post, Link}
 
   def get_or_insert_feed(attrs) do
     case Repo.get_by(Feed, url: attrs.url) do
@@ -44,5 +44,15 @@ defmodule DB.Update do
     Repo.get!(Post, id)
     |> Post.toggle_podcast()
     |> Repo.update()
+  end
+
+  def insert_link(url, title) do
+    link = Link.changeset(%Link{}, %{ url: url, title: title})
+    Repo.insert!(link)
+  end
+
+  def delete_link(id) do
+    link = Repo.get!(Link, id)
+    Repo.delete link 
   end
 end

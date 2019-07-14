@@ -1,31 +1,27 @@
 defmodule JazzWeb.LinkController do
   use JazzWeb, :controller
-  alias Jazz.{Repo, Link}
 
   def index(conn, _params) do
     render(
       conn,
       "index.html",
-      links: Repo.all(Link),
+      links: DB.Get.all_links,
       page: "links"
     )
   end
 
   def create(conn, %{"url" => url}) do
-    title = get_title_from_url(url)
-    link = Link.changeset(%Link{}, %{ url: url, title: title})
-    Repo.insert!(link)
+    DB.Update.insert_link url, get_title_from_url(url)
     render(
       conn,
       "index.html",
-      links: Repo.all(Link),
+      links: DB.Get.all_links,
       page: "links"
     )
   end
 
   def delete(conn, %{"id" => id}) do
-    link = Repo.get!(Link, id)
-    case Repo.delete link do
+    case DB.Update.delete_link(id) do
       {:ok, _} ->
         conn
         |> put_flash(:info, "The link will miss you")
@@ -37,6 +33,9 @@ defmodule JazzWeb.LinkController do
     end
   end
 
+  ###
+  # Below two functions do not belong here, but nowhere good to put them for now
+  ###
   defp get_title_from_url(url) do
     case HTTPoison.get(url) do
       {:ok, %HTTPoison.Response{body: body}} -> get_title_from_body(body, url)

@@ -1,6 +1,6 @@
 defmodule DB.Get do
   import Ecto.Query
-  alias Jazz.{Repo, Feed, Post}
+  alias Jazz.{Repo, Feed, Post, Link}
 
   def post(id) do
     Repo.get(Post, id)
@@ -32,5 +32,9 @@ defmodule DB.Get do
   def all_posts_from_feed(feed_id) do
     query = from p in Post, where: p.feed_id == ^feed_id, select: [:title, :id, :feed_title, :podcast, :saved], order_by: [desc: :id], limit: 1000
     Repo.all(query)
+  end
+
+  def all_links do
+    Repo.all(Link)
   end
 end
