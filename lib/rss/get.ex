@@ -45,7 +45,7 @@ defmodule RSS.Get do
     }
   end
 
-  defp guid(title) do
+  defp guid_from_title(title) do
     title
     |> Base.encode16(case: :lower)
     |> String.slice(0, 20)
