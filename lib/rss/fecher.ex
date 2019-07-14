@@ -21,11 +21,7 @@ defmodule RSS.Fetcher do
   end
 
   # See: https://github.com/benoitc/hackney/issues/464
-  def handle_info({:ssl_closed, msg}, state) do
-    IO.puts "ssl closed error"
-    IO.inspect msg
-    {:noreply, state}
-  end
+  def handle_info({:ssl_closed, _msg}, state), do: {:noreply, state}
 
   defp schedule_work(timeout) do
     Process.send_after(self(), :fetch, timeout)
