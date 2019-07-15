@@ -49,8 +49,9 @@ nav a.current {
 }
 main {
     max-width: 44em;
-    margin-left: 8em;
+    margin-left: 9em;
 }
+
 @media (max-width: 52em) {
     nav {
         float: none;
@@ -73,6 +74,8 @@ main {
 h1.title {
     padding: 5px 0;
     font-size: 19px;
+}
+h1.title a {
     font-weight: 400;
 }
 input {
@@ -91,9 +94,14 @@ input {
     background: pink;
 }
 textarea.edit_note {
-    width: calc(100vw - 58px);
+    width: calc(100vw - 11em);
     height: calc(100vh - 120px);
     font-size: inherit;
     padding: 10px;
 }
 
+@media (max-width: 52em) {
+    textarea.edit_note {
+        width: calc(100vw - 58px);
+    }
+}

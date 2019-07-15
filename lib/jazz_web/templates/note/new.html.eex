@@ -1,0 +1,12 @@
+<h1 class=title>New Note</h1>
+
+<%= form_for @conn, Routes.note_path(@conn, :create), fn f -> %>
+  <%= text_input f, :path, list: 'dirs', placeholder: 'e.g. "code/kubernetes.md"' %>
+  <datalist id="dirs">
+    <%= for file <- @dirs do %>
+      <option><%= file %></option>
+    <% end %>
+  </datalist>
+
+  <%= submit "create file" %>
+<% end %>

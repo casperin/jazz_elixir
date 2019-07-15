@@ -2,18 +2,41 @@ defmodule JazzWeb.NoteController do
   use JazzWeb, :controller
 
   @notes_path System.get_env("NOTES_PATH") || "/home/g/notes"
+  @root_trim String.length(@notes_path) + 1
 
   defp full_path(file), do: "#{@notes_path}/#{file}"
 
   def index(conn, _params) do
-    root_trim = String.length(@notes_path) + 1
     render(
       conn,
       "index.html",
-      files: Notes.FlatFiles.list_all(@notes_path)
-      |> Enum.map(&String.slice(&1, root_trim, 1000)),
+      files: FS.list_files(@notes_path)
+      |> Enum.map(&String.slice(&1, @root_trim, 1000)),
       page: "notes"
     )
+  end
+
+  def new(conn, _params) do
+    render(
+      conn,
+      "new.html",
+      dirs: FS.list_dirs(@notes_path)
+      |> Enum.map(&String.slice(&1, @root_trim, 1000)),
+      page: "Create note"
+    )
+  end
+
+  def create(conn, %{"path" => path}) do
+    case File.touch("#{@notes_path}/#{path}") do
+      :ok -> 
+        conn
+        |> redirect(to: Routes.note_path(conn, :edit, file: path))
+      {:error, msg} ->
+        IO.inspect msg
+        conn
+        |> put_flash(:error, "Something went wrong :(")
+        |> redirect(to: Routes.note_path(conn, :index))
+    end
   end
 
   def view(conn, %{"file" => file}) do

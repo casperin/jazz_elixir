@@ -21,6 +21,8 @@ defmodule JazzWeb.Router do
     get "/notes", NoteController, :index
     get "/notes/view", NoteController, :view
     get "/notes/edit", NoteController, :edit
+    get "/notes/new", NoteController, :new
+    post "/notes/create", NoteController, :create
     post "/notes/edit", NoteController, :save
     get "/notes/git_diff", NoteController, :git_diff
     post "/notes/git_add_commit", NoteController, :git_add_commit

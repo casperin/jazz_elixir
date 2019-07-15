@@ -1,6 +1,9 @@
 <h1 class=title>
   Notes
+
   <%= link "Git", to: Routes.note_path(@conn, :git_diff) %>
+
+  <%= link "New", to: Routes.note_path(@conn, :new) %>
 </h1>
 
 <input type=search placeholder=search class=search_item>
