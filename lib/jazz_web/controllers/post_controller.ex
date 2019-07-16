@@ -1,7 +1,6 @@
 defmodule JazzWeb.PostController do
   use JazzWeb, :controller
 
-  # unread posts
   def index(conn, _params) do
     posts = DB.Get.all_unread_posts
     ids = Stream.map(posts, fn p -> p.id end) |> Enum.join(",")
@@ -14,7 +13,6 @@ defmodule JazzWeb.PostController do
     )
   end
 
-  # saved
   def saved(conn, _params) do
     render(
       conn,
@@ -24,7 +22,6 @@ defmodule JazzWeb.PostController do
     )
   end
 
-  # saved
   def podcasts(conn, _params) do
     render(
       conn,
@@ -34,7 +31,6 @@ defmodule JazzWeb.PostController do
     )
   end
 
-  # See specific post
   def show(conn, %{"id" => id}) do
     post = DB.Get.post(id)
     render(
@@ -60,13 +56,9 @@ defmodule JazzWeb.PostController do
     redirect(conn, to: Routes.post_path(conn, get_path(to)))
   end
 
-  defp get_path(page) do
-    case page do
-      "saved" -> :saved
-      "podcasts" -> :podcasts
-      _ -> :index
-    end
-  end
+  defp get_path("saved"), do: :saved
+  defp get_path("podcasts"), do: :podcasts
+  defp get_path(_), do: :index
 
   def all_read(conn, %{"ids" => ids}) do
     if ids != "" do

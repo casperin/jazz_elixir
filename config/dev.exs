@@ -21,7 +21,7 @@ config :jazz, Jazz.Repo,
 config :jazz, JazzWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
-  code_reloader: true,
+  # code_reloader: true,
   check_origin: false,
   watchers: []
 
@@ -50,15 +50,15 @@ config :jazz, JazzWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :jazz, JazzWeb.Endpoint,
-  live_reload: [
-    patterns: [
-      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"priv/gettext/.*(po)$",
-      ~r"lib/jazz_web/{live,views}/.*(ex)$",
-      ~r"lib/jazz_web/templates/.*(eex)$"
-    ]
-  ]
+# config :jazz, JazzWeb.Endpoint,
+#   live_reload: [
+#     patterns: [
+#       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+#       ~r"priv/gettext/.*(po)$",
+#       ~r"lib/jazz_web/{live,views}/.*(ex)$",
+#       ~r"lib/jazz_web/templates/.*(eex)$"
+#     ]
+#   ]
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

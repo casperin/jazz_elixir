@@ -27,16 +27,9 @@ defmodule JazzWeb.NoteController do
   end
 
   def create(conn, %{"path" => path}) do
-    case File.touch("#{@notes_path}/#{path}") do
-      :ok -> 
-        conn
-        |> redirect(to: Routes.note_path(conn, :edit, file: path))
-      {:error, msg} ->
-        IO.inspect msg
-        conn
-        |> put_flash(:error, "Something went wrong :(")
-        |> redirect(to: Routes.note_path(conn, :index))
-    end
+    :ok = File.touch("#{@notes_path}/#{path}")
+    conn
+    |> redirect(to: Routes.note_path(conn, :edit, file: path))
   end
 
   def view(conn, %{"file" => file}) do
@@ -60,18 +53,10 @@ defmodule JazzWeb.NoteController do
   end
 
   def save(conn, %{"file" => file, "content" => content}) do
-    path = full_path(file)
-    content = String.replace(content, "\r", "")
-    case File.write(path, content) do
-      :ok -> 
-        conn
-        |> put_flash(:info, "Changed saved")
-        |> redirect(to: Routes.note_path(conn, :view, file: file))
-      {:error, _} ->
-        conn
-        |> put_flash(:error, "Something went wrong :(")
-        |> redirect(to: Routes.note_path(conn, :edit, file: file))
-    end
+    :ok = File.write full_path(file), String.replace(content, "\r", "")
+    conn
+    |> put_flash(:info, "Changed saved")
+    |> redirect(to: Routes.note_path(conn, :view, file: file))
   end
 
   def git_diff(conn, _params) do
