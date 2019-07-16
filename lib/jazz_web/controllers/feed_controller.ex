@@ -29,6 +29,7 @@ defmodule JazzWeb.FeedController do
   end
 
   def preview(conn, %{"url" => url}) do
+    url = String.trim(url)
     case RSS.get(url) do
       {:ok, feed, posts} ->
         conn
@@ -43,13 +44,12 @@ defmodule JazzWeb.FeedController do
   end
 
   def create(conn, %{"url" => url}) do
+    url = String.trim(url)
     case RSS.get(url) do
       {:ok, feed_attr, post_attrs} ->
         msg = case DB.Update.get_or_insert_feed(feed_attr) do
           {:ok, feed} ->
-            IO.inspect post_attrs
             x = DB.Update.insert_posts_optimistic({post_attrs, feed.id})
-            IO.inspect x
             "#{feed.title} saved"
 
           {:error, msg} ->

@@ -1,5 +1,6 @@
 defmodule RSS do
   def get(url) do
+    IO.puts "get URL #{url}"
     case fetch_(url) do
       {:ok, feed} -> parse(url, feed)
       _ -> {:error, "Could not fetch or parse feed"}
@@ -7,6 +8,7 @@ defmodule RSS do
   end
 
   defp fetch_(url) do
+    IO.puts "URL #{url}"
     with {:ok, %HTTPoison.Response{body: body}} <- HTTPoison.get(url),
          {:ok, feed, _header} <- FeederEx.parse(body),
          do: {:ok, feed}
