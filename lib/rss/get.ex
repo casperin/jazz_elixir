@@ -5,7 +5,7 @@ defmodule RSS do
   def get(url) do
     case fetch_(url) do
       {:ok, feed, contents} -> parse(url, feed, contents)
-      _ -> {:error, "Could not fetch or parse feed"}
+      _ -> {:error, "Could not fetch or parse feed from #{url}"}
     end
   end
 
