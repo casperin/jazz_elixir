@@ -53,7 +53,9 @@ window.addEventListener("keydown", function (e) {
     }
 })
 
-var focused =  Number(localStorage.getItem("focused")) || -1
+var focused = localStorage.getItem("focused")
+    ?  Number(localStorage.getItem("focused"))
+    : -1
 var all_items = Array.from(document.querySelectorAll(".item:not(.hide), .content a"))
 if (all_items[focused]) {
     all_items[focused].focus()
