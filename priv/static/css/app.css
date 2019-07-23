@@ -21,10 +21,10 @@ a:hover {
 pre, code {
     color: #306754;
 }
-ul p {
+ul p, ol p {
     margin: 0;
 }
-li {
+.posts-list li {
     margin-bottom: .5em;
 }
 *:focus {
