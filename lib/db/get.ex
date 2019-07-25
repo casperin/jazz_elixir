@@ -34,6 +34,10 @@ defmodule DB.Get do
     Repo.all(query)
   end
 
+  def link(id) do
+    Repo.get(Link, id)
+  end
+
   def all_links do
     Repo.all(Link)
   end

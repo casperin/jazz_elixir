@@ -78,7 +78,8 @@ h1.title {
 h1.title a {
     font-weight: 400;
 }
-input {
+input, textarea {
+    font: inherit;
     border: 2px solid black;
     width: 50%;
     padding: 4px;

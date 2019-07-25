@@ -20,6 +20,32 @@ defmodule JazzWeb.LinkController do
     )
   end
 
+  def edit(conn, %{"id" => id}) do
+    render(
+      conn,
+      "edit.html",
+      link: DB.Get.link(id),
+      errors: [],
+      page: "link"
+    )
+  end
+
+  def save(conn, %{"id" => id, "title" => title, "url" => url, "comment" => comment} = params) do
+    case DB.Update.update_link(id, params) do
+      {:ok, _} ->
+        redirect(conn, to: Routes.link_path(conn, :index))
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "Something went wrong")
+        |> render(
+          "edit.html",
+          link: %Jazz.Link{id: id, title: title, url: url, comment: comment},
+          errors: changeset.errors,
+          page: "link"
+        )
+    end
+  end
+
   def delete(conn, %{"id" => id}) do
     case DB.Update.delete_link(id) do
       {:ok, _} ->

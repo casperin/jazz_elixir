@@ -51,6 +51,12 @@ defmodule DB.Update do
     Repo.insert!(link)
   end
 
+  def update_link(id, changes) do
+    Repo.get!(Link, id)
+    |> Link.changeset(changes)
+    |> Repo.update()
+  end
+
   def delete_link(id) do
     link = Repo.get!(Link, id)
     Repo.delete link 

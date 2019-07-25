@@ -1,0 +1,35 @@
+<h1><%= @link.title %></h1>
+
+<%= form_for @conn, Routes.link_path(@conn, :edit, @link.id), fn f -> %>
+  <label>
+    <div>Title</div>
+    <%= text_input f, :title, value: @link.title, autofocus: true %>
+    <%= if Keyword.has_key?(@errors, :title) do %>
+      <mark><%= elem(Keyword.get(@errors, :title), 0) %></mark>
+    <% end %>
+  </label>
+  <br>
+  <br>
+
+  <label>
+    <div>Url</div>
+    <%= text_input f, :url, value: @link.url %>
+    <%= if Keyword.has_key?(@errors, :url) do %>
+      <mark><%= elem(Keyword.get(@errors, :url), 0) %></mark>
+    <% end %>
+  </label>
+  <br>
+  <br>
+
+  <label>
+    <div>Comment</div>
+    <%= textarea f, :comment, value: @link.comment %>
+    <%= if Keyword.has_key?(@errors, :comment) do %>
+      <mark><%= elem(Keyword.get(@errors, :comment), 0) %></mark>
+    <% end %>
+  </label>
+  <br>
+  <br>
+
+  <%= submit "Save" %>
+<% end %>

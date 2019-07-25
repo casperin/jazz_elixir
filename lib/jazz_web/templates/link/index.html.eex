@@ -10,8 +10,16 @@
   <%= for link <- @links do %>
     <li>
       <%= link link.title, to: link.url, class: "item" %>
+      <%= if link.comment do %>
+        <br>
+        <%= link.comment %>
+      <% end %>
       <br>
-      <small><%= link "delete", to: Routes.link_path(@conn, :delete, link.id), class: 'toggle-save' %></small>
+      <small>
+        <%= link "edit", to: Routes.link_path(@conn, :edit, link.id) %>
+        &middot;
+        <%= link "delete", to: Routes.link_path(@conn, :delete, link.id), class: 'toggle-save' %>
+      </small>
     </li>
   <% end %>
 </ul>

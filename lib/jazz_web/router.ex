@@ -42,6 +42,8 @@ defmodule JazzWeb.Router do
 
     resources "/links", LinkController, only: [:index, :create]
     get "/links/delete/:id", LinkController, :delete
+    get "/links/edit/:id", LinkController, :edit
+    post "/links/edit/:id", LinkController, :save
   end
 
   # Other scopes may use custom stacks.

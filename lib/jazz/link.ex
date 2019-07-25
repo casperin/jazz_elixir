@@ -5,13 +5,14 @@ defmodule Jazz.Link do
   schema "links" do
     field :url, :string
     field :title, :string
+    field :comment, :string
 
     timestamps()
   end
 
   def changeset(link, attrs) do
     link
-    |> cast(attrs, [:url, :title])
+    |> cast(attrs, [:url, :title, :comment])
     |> validate_required([:url, :title])
   end
 end
