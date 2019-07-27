@@ -2,7 +2,7 @@
   <h1 class=title>
     <%= length(@posts) %> unread
     <%= hidden_input f, :ids, value: @ids %>
-    <%= submit "Mark all as read", disabled: length(@posts) == 0 %>
+    <%= submit "Mark all as read", disabled: length(@posts) == 0, class: "mark-all-as-read" %>
   </h1>
 <% end %>
 

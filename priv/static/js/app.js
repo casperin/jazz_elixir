@@ -18,6 +18,12 @@ window.addEventListener("keydown", function (e) {
                 e.preventDefault()
             }
             break
+        case "m":
+            const markAllAsReadBtn = document.querySelector(".mark-all-as-read")
+            if (markAllAsReadBtn) {
+                markAllAsReadBtn.click()
+            }
+            return
         case "U":
         case "1":
             return document.location.href = "/"
