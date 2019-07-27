@@ -98,7 +98,7 @@ if (search_item) {
 }
 
 function filter(value) {
-    value = value.trim()
+    value = value.trim().toLowerCase()
     var item, hide_item
     for (item of all_items) {
         hide_item = item.getAttribute("data-text").indexOf(value) === -1

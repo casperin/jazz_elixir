@@ -10,7 +10,7 @@
 
 <ul>
   <%= for file <- @files do %>
-    <li data-text="<%= file %>" class="item">
+    <li data-text="<%= String.downcase(file) %>" class="item">
       <%= link file, to: Routes.note_path(@conn, :view, file: file) %>
     </li>
   <% end %>
