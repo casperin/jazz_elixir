@@ -42,6 +42,10 @@ window.addEventListener("keydown", function (e) {
         case "F":
         case "6":
             return document.location.href = "/feeds"
+
+        // Special case, because I go here a *lot*
+        case "M":
+            return document.location.href = "/notes/view?file=memory.md"
     }
 
     const classes = {
