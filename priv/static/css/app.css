@@ -13,6 +13,7 @@ a {
     text-decoration: none;
 }
 a:focus {
+    color: black;
     background-color: #fd0;
 }
 a:hover {
