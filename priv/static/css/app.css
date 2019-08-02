@@ -12,6 +12,9 @@ body {
 a {
     text-decoration: none;
 }
+a:focus {
+    background-color: #fd0;
+}
 a:hover {
     text-decoration: underline;
 }
@@ -28,7 +31,7 @@ ul p, ol p {
     margin-bottom: .5em;
 }
 *:focus {
-    outline: 4px solid #fb7;
+    outline: 4px solid #fd0;
     outline-offset: 0;
 }
 nav {
