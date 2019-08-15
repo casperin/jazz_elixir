@@ -3,7 +3,7 @@ window.addEventListener("keydown", function (e) {
         return
     }
 
-    if (e.ctrlKey || e.altKey) {
+    if (e.ctrlKey || e.altKey || e.metaKey) {
         return
     }
 
