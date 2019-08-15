@@ -48,7 +48,7 @@ defmodule JazzWeb.NoteController do
       "edit.html",
       file: file,
       content: File.read!(full_path(file)),
-      page: "Edit: ${file}"
+      page: "Edit: #{file}"
     )
   end
 
