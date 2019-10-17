@@ -11,7 +11,13 @@ defmodule DB.Update do
     end
   end
 
+  def delete_posts(feed_id) do
+    from(p in Post, where: p.feed_id == ^feed_id)
+	|> Repo.delete_all
+  end
+
   def delete_feed(id) do
+	delete_posts(id)
     feed = DB.Get.feed(id)
     Repo.delete(feed)
   end
