@@ -25,7 +25,7 @@ defmodule RSS.Scheduler do
 
   def handle_info({:error, msg}, state) do
     IO.inspect(msg)
-    {:noreply, state)
+    {:noreply, state}
   end
 
   defp schedule_work(timeout) do

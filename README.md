@@ -1,5 +1,19 @@
 # Jazz
 
+## Do stuff
+
+```sh
+# run server
+mix phx.server
+
+# pull and deploy (heh)
+git pull
+source config.sh && MIX_ENV=prod mix release
+_build/prod/rel/jazz/bin/jazz restart
+```
+
+---
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
