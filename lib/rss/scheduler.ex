@@ -23,6 +23,11 @@ defmodule RSS.Scheduler do
   # See: https://github.com/benoitc/hackney/issues/464
   def handle_info({:ssl_closed, _msg}, state), do: {:noreply, state}
 
+  def handle_info({:error, msg}, state) do
+    IO.inspect(msg)
+    {:noreply, state)
+  end
+
   defp schedule_work(timeout) do
     Process.send_after(self(), :fetch, timeout)
   end
