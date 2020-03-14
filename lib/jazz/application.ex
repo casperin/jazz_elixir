@@ -16,7 +16,9 @@ defmodule Jazz.Application do
       JazzWeb.Endpoint,
       # Starts a worker by calling: Jazz.Worker.start_link(arg)
       # {Jazz.Worker, arg},
-      RSS.Scheduler
+      #
+      # Uncomment the line below to have the scheduler actually run. For now I don't need it.
+      # RSS.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
